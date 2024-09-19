@@ -282,7 +282,7 @@
             if(rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
-                //Oppgave 2: Jeg puttet denne koden under if(rundenVunnet === true) {, og ved hjelp av W3schools jeg fikk det til.
+                //Oppgave 2: Jeg puttet denne koden under if(rundenVunnet === true) {, først fikk jeg feil fordi jeg brukte "document.body", men etter å ha lest de andre kodene byttet jeg det til "document.getElementById"//
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700";
                 //Gjør restart spill-knappen synlig
                 document.getElementById("newgame").style.display = "block";
