@@ -251,6 +251,8 @@
         }
 
         function sjekkVinner() {
+            //Oppgave 3: Hele koden i sjekkVinner er nå pakket inn i en setTimeout funksjon.
+            setTimeout(function() {
             var rundenVunnet = false;
             //Vi må sjekke etter vinner for hver brikke som plasseres på brettet.
             // Dette gjør vi ved å gå gjennom alle vinnerkombinasjonene, og
@@ -282,6 +284,12 @@
             if(rundenVunnet === true) {
                 //Skriv ut hvilken spiller som har vunnet
                 document.getElementById("playerturn").innerHTML = "Spiller " + player + " har vunnet!";
+                //Oppgave 4: Når en spiller vinner, endrer jeg fargen til gul for de tre brikkene i vinnerrekken, men jeg fikk ikke tilbakestile fargen etter man starter på nytt.
+                document.getElementById("celle" + vinnerKomboPlass1).style.color = "#FFD700";
+                document.getElementById("celle" + vinnerKomboPlass2).style.color = "#FFD700";
+                document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700";
+
+
                 //Oppgave 2: Jeg puttet denne koden under if(rundenVunnet === true) {, først fikk jeg feil fordi jeg brukte "document.body", men etter å ha lest de andre kodene byttet jeg det til "document.getElementById"//
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700";
                 //Gjør restart spill-knappen synlig
@@ -290,6 +298,8 @@
                 //flere brikker på brettet - dette løses med sjekken i funksjonen spill()
                 spillStatus = false;
             }
+
+        }, 1000); //Oppgave 3: Dette gir en forsinkelse på ett sekund.
         }
 
         //Når et spill er avsluttet, og et nytt skal begynne, må vi gjøre klar en del ting:
@@ -313,6 +323,8 @@
             playermark = "X";
             // 4)
             document.getElementById("playerturn").innerHTML = 'Spiller <span id="player">1</span> (<span id="playermark">X</span>) sin tur:';
+            
+            
         }
     </script>
 </body>
