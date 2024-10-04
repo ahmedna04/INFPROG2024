@@ -9,17 +9,17 @@
     <h1>Regn ut din alder</h1>
     <p>
     <label for="birthyear">Ditt fødselår</label>
-    <input id="birthyear" type="number" />
+    <input id="birthyear" type="number"/>
     </p>
     <p>
         <label for="year">År for utregning:</label>
-        <input id="year" type="number" />
+        <input id="year" type="number"/>
         <p><button onclick="ageCalculator()">Regn ut</button></p>
     </p>
     <p id="agesentence"></p>
     <script>
         function ageCalculator() {
-            //Hente ¨årstall fra inputs:
+            //Hente årstall fra inputs:
             const birthyear = document.getElementById("birthyear").value
             const year = document.getElementById("year").value
             //Regne ut alder
