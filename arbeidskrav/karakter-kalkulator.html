@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karakter kalkulator</title>
+    <style>
+        
+        button {
+            display:block;
+         margin: 8px;
+        }  
+        
+        button {
+         background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Karakter kaklulator</h1>
+    <form id="karakterKalkulator">
+        <label>Poeng Oppgave 1 (maks 10):</label>
+        <input type="number" id="oppgave1" min="0" max="10" required>
+        
+        <label>Poeng Oppgave 2 (maks 12):</label>
+        <input type="number" id="oppgave2" min="0" max="12" required>
+        <button type="button" onclick="beregnKarakter()">Beregn</button>
+
+        //Det her printer ut resultatet//
+        <output id="resultat"></output>
+    </form>
+
+    <script>
+        const grades = [
+            {grade: "F", threshold: 0},
+            {grade: "E", threshold: 25},
+            {grade: "D", threshold: 44},
+            {grade: "C", threshold: 68},
+            {grade: "B", threshold: 88},
+            {grade: "A", threshold: 100},
+        ];
+
+        function beregnKarakter() {
+            //Henter verdier fra inputfeltene//
+            const poengOppgave1 = parseFloat(document.getElementById("oppgave1").value);
+            const poengOppgave2 = parseFloat(document.getElementById("oppgave2").value);
+
+            //Her har jeg lagt til maks verdi som er 10 og 12//
+            const maksPoengOppgave1 = 10;
+            const maksPoengOppgave2 = 12;
+
+            //Det her vil sjekke om begge feltene har verdier//
+            if (isNaN(poengOppgave1) || isNaN(poengOppgave2)) {
+                alert("Fyll inn i begge feltene.");
+                return;
+            }
+
+            //Kalkuler total prosent//
+            const prosent = (0.3 * (poengOppgave1 / maksPoengOppgave1 * 100)) + 
+            (0.7 * (poengOppgave2 / maksPoengOppgave2 * 100));
+
+            //det her skal sjekke karakter fra lavest til høyest. Det her er en for-løkke//
+            let karakter = "F"; 
+            for (let i = grades.length - 1; i >= 0; i--) {
+              if (prosent >= grades[i].threshold) {
+                karakter = grades[i].grade;
+            break;
+                }
+            }
+
+            
+            document.getElementById("resultat").textContent = `Karakter: ${karakter}`;
+            
+        }
+    </script>
+</body>
+</html>
+
+
+<h2>Kilder brukt: 
+https://www.w3schools.com/tags/att_input_type_number.asp</h2>
+
+<h2>https://www.w3schools.com/js/js_loop_for.asp</h2>
+
+<h2>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/parseFloat</h2>
