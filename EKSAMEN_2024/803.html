@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam </title>
+    <link href="exam3.css" rel="stylesheet" media="all">
+</head>
+<body>
+    <main>
+        <h1>Fargepaletten</h1>
+        <canvas id="colorspace"></canvas>
+        <nav>
+            <button id="addColor">Legg till en farge</button>
+            <button id="emptyArray">Tilbakestill fargene</button>
+            <button id="generateAll">Generer 10 nye farger</button>
+        </nav>
+        <h2>Endre farger:</h2>
+        <section>
+            <p>Bytt ut fargen i rute <select id="colorSquareIndex">
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">3</option>
+                <option value="3">4</option>
+                <option value="4">5</option>
+                <option value="5">6</option>
+                <option value="6">7</option>
+                <option value="7">8</option>
+                <option value="8">9</option>
+                <option value="9">10</option>
+            </select> med #<input type="text" id="newColor" /> <button id="saveNewColor">Lagre ny farge</button></p>
+        </section>
+    </main>
+    
+
+    <script>
+        //Configure canvas
+        const canvas = document.getElementById("colorspace")
+        canvas.width = 1000
+        canvas.height = 100
+        const ctx = canvas.getContext("2d")
+
+        /* --- YOUR FUNCTIONALITY AND CODE GOES HERE --- */
+
+        // Løsning av denne oppgaven var inspirert av disse to kildene: https://www.youtube.com/watch?v=M2VevakO_p0 og https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+
+        // Først lager jeg en tom liste, også lager jeg en funsjkon for å lage farger
+
+        let colors = [];
+
+        function generateRandomColor() {
+            let color = "#"; // Det her er fordi alle fargene starter med # for eksempel "#123456"
+            const letters = "0123456789ABCDEF"; // Det her er alle tegenene for hex koder
+            for (let i = 0; i < 6; i++) { // Det her er fordi alle hex fargene skal ha maks 6 tegn, den setter en "limit" på en måte
+                const randomIndex = Math.floor(Math.random() * 16); // Det her er for å trekke et tilfeldig tall mellom 0 og 16, sånn at den generer farger med alle de mulige kombinasjonene
+                color += letters[randomIndex]; 
+    }
+    return color;
+}    
+// Her legger jeg til en evenetlistener på legg til farge knappen for å gi den funksjonalitet
+document.getElementById("addColor").addEventListener("click", function () {
+    if (colors.length < 10) { // Sjekker om jeg har mindre enn 10 farger. Den stopper hvis jeg har 10 farger
+
+        const newColor = generateRandomColor(); // Lager en ny tilfeldig farge
+        colors.push(newColor); // Og legger fargen i lista
+        console.log(colors);
+        
+    }
+});
+
+
+
+        //requestAnimationFrame
+        const requestAnimationFrame = window.requestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame
+        function renderCanvas() {
+
+            // Laget koden ved hjelp av lærerens GitHub-repository som vi også bruker
+            // https://github.com/toremake/innfprog/blob/main/cheatsheets/canvas-animation.html og https://www.youtube.com/watch?v=5HHlz2W9DME
+
+    const squareWidth = 100; // Boksen er 1000px, så for at alle 10 fargene skal passe har jeg lagt til 100px limit på hvert eneste firkant
+    for (let i = 0; i < colors.length; i++) {
+        ctx.fillStyle = colors[i]; // Setter fargen til firkanten
+        ctx.fillRect(i * squareWidth, 0, squareWidth, canvas.height); // Tegner firkanten
+       
+
+        // Her skriver jeg  ut fargekoden midt i firkanten og justerer på font størrelse og skrift
+        // Og teksten som viser hva farge koden er blir til hvit med 15px i størrelse. Det var ingen konkret beskrivelse på hva tekststørrelse og farge skulle være.
+
+        ctx.fillStyle = "#ffffff";  
+        ctx.font = "15px Arial";
+        ctx.fillText(colors[i], i * squareWidth + 10, 50);
+    }
+            requestAnimationFrame(renderCanvas)
+        }
+
+        //Initial running of drawing canvas
+        renderCanvas()
+    </script>
+</body>
+</html>
